@@ -9,7 +9,7 @@ public class Config {
     static {
         try {
             properties = new Properties();
-            FileInputStream file = new FileInputStream("/Users/marlen/Desktop/JavaProjects/IntellijIdeaProjects/cucumber-final/src/test/resources/configurations.properties");
+            FileInputStream file = new FileInputStream("src/test/resources/configurations.properties");
             properties.load(file);
             file.close();
         }
@@ -17,6 +17,7 @@ public class Config {
             System.out.println("File not found");
         }
     }
+
 
     public static String getValue(String key){
         return properties.getProperty(key);
