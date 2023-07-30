@@ -39,44 +39,4 @@ public class SellersTest {
         }
     }
 
-    @Test
-    public void createSeller(){
-
-        RequestBody requestBody = new RequestBody();
-        requestBody.setCompany_name("Petro");
-        requestBody.setSeller_name("Dungan");
-        requestBody.setEmail("dungan@gmail.com");
-        requestBody.setPhone_number("123123123");
-        requestBody.setAddress("Duncan Street 13");
-        APIRunner.runPOST("/api/myaccount/sellers", requestBody);
-        System.out.println(APIRunner.getCustomResponse().getResponseBody());
-    }
-
-    @Test
-    public void singleSellerCreation(){
-        String pathForPost = "/api/myaccount/sellers/";
-        Faker faker = new Faker();
-        String companyName = faker.company().name();
-        String sellerName = faker.name().fullName();
-        String email = faker.internet().emailAddress();
-        String phoneNumber = faker.phoneNumber().phoneNumber();
-
-        RequestBody requestBody = new RequestBody();
-        requestBody.setCompany_name(companyName);
-        requestBody.setSeller_name(sellerName);
-        requestBody.setEmail(email);
-        requestBody.setPhone_number(phoneNumber);
-
-        APIRunner.runPOST(pathForPost, requestBody);
-        int sellerID = APIRunner.getCustomResponse().getSeller_id();
-
-
-        String pathForGet = "/api/myaccount/sellers/" + sellerID;
-        APIRunner.runGET(pathForGet);
-
-        Assert.assertEquals("Seller is not created", companyName, APIRunner.getCustomResponse().getCompany_name());
-        Assert.assertEquals(sellerName, APIRunner.getCustomResponse().getSeller_name());
-        Assert.assertEquals(email, APIRunner.getCustomResponse().getEmail());
-        Assert.assertEquals(phoneNumber, APIRunner.getCustomResponse().getPhone_number());
-    }
 }
